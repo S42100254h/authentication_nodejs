@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ユーザー登録</title>
+  </head>
+  <body>
+    <div>
+      <form action="/register" method="POST">
+        <h2>ユーザー登録</h2>
+        <div>
+          <label for="name">お名前:</label>
+          <input
+            name="name"
+            type="text"
+            id="name"
+            placeholder="Username"
+            autofocus="true"
+          />
+        </div>
+        <div>
+          <label for="email">メールアドレス:</label>
+          <input
+            name="email"
+            type="text"
+            id="email"
+            placeholder="Email"
+            autofocus="true"
+          />
+        </div>
+        <div>
+          <label for="password">パスワード:</label>
+          <input
+            name="password"
+            type="password"
+            id="password"
+            placeholder="Password"
+          />
+        </div>
+        <div>
+          <label for="passwordConfirm">パスワード（確認）:</label>
+          <input
+            name="confirm"
+            type="password"
+            id="confirm"
+            placeholder="Password confirm"
+          />
+        </div>
+        <button type="submit">登録</button>
+      </form>
+    </div>
+  </body>
+</html>
