@@ -10,6 +10,8 @@ const port = 3000;
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.set("view engine", "ejs");
+
 app.use(
   session({
     secret: "secret",
@@ -21,6 +23,22 @@ app.use(
 
 app.get("/", (req, res) => {
   res.status(200).send("Hello World!");
+});
+
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+app.get("/registerSuccess", (req, res) => {
+  res.render("registerSuccess");
+});
+
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+app.get("/loginSuccess", (req, res) => {
+  res.render("loginSuccess");
 });
 
 app.post("/register", async (req, res) => {
@@ -51,7 +69,7 @@ app.post("/login", async (req, res) => {
         req.session.userId = user.id;
         console.log("ログインしました！");
       });
-      return res.status(200).json(user);
+      res.redirect("loginSuccess");
     } else {
       console.log("パスワードに誤りがあります");
       res.redirect("login");

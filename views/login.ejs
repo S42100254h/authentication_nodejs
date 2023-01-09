@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ログイン</title>
+  </head>
+  <body>
+    <div>
+      <form action="/login" method="POST">
+        <h2>ログイン</h2>
+        <div>
+          <label for="email">メールアドレス:</label>
+          <input
+            name="email"
+            type="text"
+            id="email"
+            placeholder="Email"
+            autofocus="true"
+          />
+        </div>
+        <div>
+          <label for="password">パスワード:</label>
+          <input
+            name="password"
+            type="password"
+            id="password"
+            placeholder="Password"
+          />
+        </div>
+        <button type="submit">ログイン</button>
+      </form>
+    </div>
+  </body>
+</html>
