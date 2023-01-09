@@ -14,7 +14,7 @@ router.get("/registerSuccess", (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login", { csrfToken: req.csrfToken() });
 });
 
 router.get("/loginSuccess", (req, res) => {
