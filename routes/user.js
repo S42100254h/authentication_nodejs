@@ -6,7 +6,7 @@ router.post("/register", UserController.register);
 router.post("/login", UserController.login);
 
 router.get("/register", (req, res) => {
-  res.render("register");
+  res.render("register", { csrfToken: req.csrfToken() });
 });
 
 router.get("/registerSuccess", (req, res) => {

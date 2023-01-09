@@ -7,6 +7,8 @@
     <div>
       <form action="/register" method="POST">
         <h2>ユーザー登録</h2>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
         <div>
           <label for="name">お名前:</label>
           <input
