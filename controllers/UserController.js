@@ -40,6 +40,12 @@ const UserController = {
       res.redirect("login");
     }
   },
+
+  async logout(req, res) {
+    console.log("ログアウトしました！");
+    req.session.destroy();
+    res.redirect("login");
+  },
 };
 
 module.exports = UserController;

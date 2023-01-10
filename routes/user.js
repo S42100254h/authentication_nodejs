@@ -4,6 +4,7 @@ const UserController = require("../controllers/UserController");
 
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
+router.get("/logout", UserController.logout);
 
 router.get("/register", (req, res) => {
   res.render("register", { csrfToken: req.csrfToken() });
