@@ -28,7 +28,11 @@ const UserController = {
       if (bcrypt.compareSync(password, user.password)) {
         req.session.userId = user.id;
         console.log("ログインしました！");
-        res.redirect("loginSuccess");
+        if (req.session.url) {
+          res.redirect(req.session.url);
+        } else {
+          res.redirect("loginSuccess");
+        }
       } else {
         console.log("パスワードに誤りがあります");
         res.redirect("login");
