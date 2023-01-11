@@ -22,4 +22,12 @@ router.get("/loginSuccess", (req, res) => {
   res.render("loginSuccess");
 });
 
+router.get("/mypage", (req, res) => {
+  res.render("mypage");
+});
+
+router.get("/mypage2", (req, res) => {
+  res.render("mypage2");
+});
+
 module.exports = router;
