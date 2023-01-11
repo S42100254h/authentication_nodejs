@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const csrf = require("csurf");
 const session = require("express-session");
+require("dotenv").config();
 
 const app = express();
 const port = 3000;
@@ -22,7 +23,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
 const userRouter = require("./routes/user");
+const resetPasswordRouter = require("./routes/resetPassword");
 app.use("/", csrfProtection, userRouter);
+app.use("/password", csrfProtection, resetPasswordRouter);
 
 app.listen(port, () => console.log(`Application listening on port ${port}!`));
 
