@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const UserController = require("../controllers/UserController");
+const authUser = require("../middlewares/authUser");
 
 router.post("/register", UserController.register);
 router.post("/login", UserController.login);
@@ -22,11 +23,11 @@ router.get("/loginSuccess", (req, res) => {
   res.render("loginSuccess");
 });
 
-router.get("/mypage", (req, res) => {
+router.get("/mypage", authUser, (req, res) => {
   res.render("mypage");
 });
 
-router.get("/mypage2", (req, res) => {
+router.get("/mypage2", authUser, (req, res) => {
   res.render("mypage2");
 });
 
