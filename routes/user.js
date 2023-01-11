@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const userController = require("../controllers/userController");
+const UserController = require("../controllers/UserController");
 const authUser = require("../middlewares/authUser");
 
-router.post("/register", userController.register);
-router.post("/login", userController.login);
-router.get("/logout", userController.logout);
+router.post("/register", UserController.register);
+router.post("/login", UserController.login);
+router.get("/logout", UserController.logout);
 
 router.get("/register", (req, res) => {
   res.render("register", { csrfToken: req.csrfToken() });
