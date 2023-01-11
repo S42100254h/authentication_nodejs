@@ -1,7 +1,7 @@
 const models = require("../models");
 const bcrypt = require("bcrypt");
 
-const UserController = {
+const userController = {
   async register(req, res) {
     const { name, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -50,4 +50,4 @@ const UserController = {
   },
 };
 
-module.exports = UserController;
+module.exports = userController;
