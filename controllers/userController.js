@@ -11,7 +11,7 @@ const userController = {
         email: email,
         password: hashedPassword,
       });
-      res.redirect("registerSuccess");
+      res.redirect("/registerSuccess");
     } catch (error) {
       return res.status(400).json(error);
     }
@@ -31,22 +31,22 @@ const userController = {
         if (req.session.url) {
           res.redirect(req.session.url);
         } else {
-          res.redirect("loginSuccess");
+          res.redirect("/loginSuccess");
         }
       } else {
         console.log("パスワードに誤りがあります");
-        res.redirect("login");
+        res.redirect("/login");
       }
     } catch (error) {
       console.log("入力内容に誤りがあります");
-      res.redirect("login");
+      res.redirect("/login");
     }
   },
 
   async logout(req, res) {
     console.log("ログアウトしました！");
     req.session.destroy();
-    res.redirect("login");
+    res.redirect("/login");
   },
 };
 
