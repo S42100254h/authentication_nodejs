@@ -26,8 +26,20 @@ router.get("/mypage2", authUser, (req, res) => {
   res.render("mypage2");
 });
 
+router.get("/forgetPassword", (req, res) => {
+  res.render("forgetPassword", { csrfToken: req.csrfToken() });
+});
+
+router.get("/sentMail", (req, res) => {
+  res.render("sentMail");
+});
+
 router.get("/resetPassword", (req, res) => {
   res.render("resetPassword", { csrfToken: req.csrfToken() });
+});
+
+router.get("/changedPassword", (req, res) => {
+  res.render("changedPassword");
 });
 
 module.exports = router;
