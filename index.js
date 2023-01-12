@@ -22,10 +22,13 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
+// ルーティング
+const indexRouter = require("./routes/index");
 const userRouter = require("./routes/user");
 const resetPasswordRouter = require("./routes/resetPassword");
-app.use("/", csrfProtection, userRouter);
-app.use("/password", csrfProtection, resetPasswordRouter);
+app.use("/", csrfProtection, indexRouter);
+app.use("/user", userRouter);
+app.use("/password", resetPasswordRouter);
 
 app.listen(port, () => console.log(`Application listening on port ${port}!`));
 
