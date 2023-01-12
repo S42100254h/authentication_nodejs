@@ -38,4 +38,8 @@ router.get("/resetPassword", (req, res) => {
   res.render("resetPassword", { csrfToken: req.csrfToken() });
 });
 
+router.get("/changedPassword", (req, res) => {
+  res.render("changedPassword");
+});
+
 module.exports = router;
