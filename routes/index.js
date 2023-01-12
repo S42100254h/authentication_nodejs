@@ -34,4 +34,8 @@ router.get("/sentMail", (req, res) => {
   res.render("sentMail");
 });
 
+router.get("/resetPassword", (req, res) => {
+  res.render("resetPassword", { csrfToken: req.csrfToken() });
+});
+
 module.exports = router;
