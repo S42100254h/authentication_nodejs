@@ -24,7 +24,7 @@ const resetPasswordController = {
 
     transporter.sendMail(message);
     console.log("メールを送信しました");
-    return res.json(200);
+    res.redirect("/sentMail");
   },
 };
 
