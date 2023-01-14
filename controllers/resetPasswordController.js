@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const bcrypt = require("bcrypt");
 const models = require("../models");
 
 const resetPasswordController = {
@@ -59,6 +60,29 @@ const resetPasswordController = {
     transporter.sendMail(message);
     console.log("メールを送信しました");
     res.redirect("/sentMail");
+  },
+
+  async resetPassword(req, res) {
+    const { email, password, token } = req.body;
+
+    models.ResetToken.findOne({
+      where: {
+        email: email,
+      },
+      include: [{ model: models.User }],
+    }).then((resetToken) => {
+      console.log(token);
+      if (resetToken && resetToken.token == token && resetToken.User) {
+        const user = resetToken.User;
+        user.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+        user.save();
+        resetToken.destroy();
+
+        res.redirect("/changedPassword");
+      } else {
+        return res.status(422).json();
+      }
+    });
   },
 };
 
