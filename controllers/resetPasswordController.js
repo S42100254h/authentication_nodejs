@@ -1,12 +1,44 @@
 const nodemailer = require("nodemailer");
+const crypto = require("crypto");
+const models = require("../models");
 
 const resetPasswordController = {
   async sendMail(req, res) {
     const { email } = req.body;
-
     const mail = process.env.MAIL_ACCOUNT;
     const pass = process.env.MAIL_PASSWORD;
 
+    // トークン作成
+    const radomStr = Math.random().toFixed(36).substring(2, 38);
+    const token = crypto
+      .createHmac("sha256", process.env.APP_KEY)
+      .update(radomStr)
+      .digest("hex");
+    const passwordResetUrl =
+      process.env.APP_URL +
+      "/resetPassword/" +
+      token +
+      "?email=" +
+      encodeURIComponent(email);
+
+    models.ResetToken.findOrCreate({
+      where: {
+        email: email,
+      },
+      defaults: {
+        email: email,
+        token: token,
+        createdAt: new Date(),
+      },
+    }).then(([resetToken, created]) => {
+      if (!created) {
+        resetToken.token = token;
+        resetToken.createdAt = new Date();
+        resetToken.save();
+      }
+    });
+
+    // メール送信
     const transporter = nodemailer.createTransport({
       service: "Gmail",
       auth: {
@@ -19,7 +51,9 @@ const resetPasswordController = {
       from: mail,
       to: email,
       subject: "パスワードを再設定してください",
-      text: "以下のリンクをクリックして、パスワードを再設定してください",
+      text:
+        "以下のリンクをクリックして、パスワードを再設定してください\n\n" +
+        passwordResetUrl,
     };
 
     transporter.sendMail(message);
