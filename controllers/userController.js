@@ -4,7 +4,8 @@ const bcrypt = require("bcrypt");
 const userController = {
   async register(req, res) {
     const { name, email, password } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+
     try {
       await models.User.create({
         name: name,
