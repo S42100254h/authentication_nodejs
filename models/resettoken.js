@@ -8,17 +8,24 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      ResetToken.hasOne(models.User, {
+        foreignKey: "email",
+        sourceKey: "email",
+      });
     }
   }
   ResetToken.init(
     {
-      email: DataTypes.STRING,
+      email: {
+        type: DataTypes.STRING,
+        primaryKey: true,
+      },
       token: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: "ResetToken",
+      updatedAt: false,
     }
   );
   return ResetToken;
