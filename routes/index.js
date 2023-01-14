@@ -34,8 +34,12 @@ router.get("/sentMail", (req, res) => {
   res.render("sentMail");
 });
 
-router.get("/resetPassword", (req, res) => {
-  res.render("resetPassword", { csrfToken: req.csrfToken() });
+router.get("/resetPassword/:token", (req, res) => {
+  res.render("resetPassword", {
+    token: req.params.token,
+    email: req.query.email,
+    csrfToken: req.csrfToken(),
+  });
 });
 
 router.get("/changedPassword", (req, res) => {
