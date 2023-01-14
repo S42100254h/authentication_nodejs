@@ -6,7 +6,7 @@ const userController = {
     const { name, email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
     try {
-      await models.user.create({
+      await models.User.create({
         name: name,
         email: email,
         password: hashedPassword,
@@ -21,7 +21,7 @@ const userController = {
     const { email, password } = req.body;
 
     try {
-      const user = await models.user.findOne({
+      const user = await models.User.findOne({
         where: { email: email },
       });
 
