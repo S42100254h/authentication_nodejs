@@ -84,7 +84,6 @@ const resetPasswordController = {
       },
       include: [{ model: models.User }],
     }).then((resetToken) => {
-      console.log(token);
       if (resetToken && resetToken.token == token && resetToken.User) {
         const user = resetToken.User;
         user.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
