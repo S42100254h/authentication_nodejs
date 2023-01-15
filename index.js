@@ -11,8 +11,8 @@ const csrfProtection = csrf({ cookie: false });
 app.use(
   session({
     secret: "secret",
-    saveUninitialized: true,
-    resave: true,
+    saveUninitialized: false,
+    resave: false,
     cookie: { maxAge: 60 * 60 * 1000 },
   })
 );
