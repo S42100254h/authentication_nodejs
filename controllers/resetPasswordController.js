@@ -2,6 +2,7 @@ const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const models = require("../models");
+const { validationResult } = require("express-validator");
 
 const resetPasswordController = {
   async sendMail(req, res) {
@@ -63,6 +64,12 @@ const resetPasswordController = {
   },
 
   async resetPassword(req, res) {
+    // バリデーション
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
     const { email, password, token } = req.body;
 
     models.ResetToken.findOne({
