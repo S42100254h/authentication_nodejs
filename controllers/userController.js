@@ -1,8 +1,15 @@
 const models = require("../models");
 const bcrypt = require("bcrypt");
+const { validationResult } = require("express-validator");
 
 const userController = {
   async register(req, res) {
+    // バリデーション
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
     const { name, email, password } = req.body;
     const hashedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 
