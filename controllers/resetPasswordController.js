@@ -6,6 +6,12 @@ const { validationResult } = require("express-validator");
 
 const resetPasswordController = {
   async sendMail(req, res) {
+    // バリデーション
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
     const { email } = req.body;
     const mail = process.env.MAIL_ACCOUNT;
     const pass = process.env.MAIL_PASSWORD;
